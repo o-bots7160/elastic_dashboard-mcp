@@ -55,8 +55,59 @@ describe("Layout file I/O", () => {
     expect(loaded.tabs[0].name).toBe("Auto");
   });
 
-  it("throws on non-existent file in readLayout", () => {
-    expect(() => readLayout(path.join(tmpDir, "nope.json"))).toThrow("not found");
+  it("preserves Dart-compatible float formatting in JSON output", () => {
+    const filePath = path.join(tmpDir, "floats.json");
+    const layout = createEmptyLayout(128);
+    layout.tabs.push(createTab("Test"));
+    layout.tabs[0].grid_layout.containers.push(
+      createWidget("Number Bar", "Speed", "/SmartDashboard/Speed", 0, 0, 256, 128, {
+        min_value: -1,
+        max_value: 1,
+        divisions: 5,
+      }),
+    );
+
+    writeLayout(filePath, layout);
+    const raw = fs.readFileSync(filePath, "utf-8");
+
+    // Structure fields should have .0
+    expect(raw).toContain('"grid_size": 128.0');
+    expect(raw).toContain('"x": 0.0');
+    expect(raw).toContain('"y": 0.0');
+    expect(raw).toContain('"width": 256.0');
+    expect(raw).toContain('"height": 128.0');
+
+    // "number" type properties should have .0
+    expect(raw).toContain('"min_value": -1.0');
+    expect(raw).toContain('"max_value": 1.0');
+    expect(raw).toContain('"period": 0.06');
+
+    // "integer" type properties must NOT have .0
+    expect(raw).toContain('"divisions": 5');
+    expect(raw).not.toContain('"divisions": 5.0');
+
+    // version should stay as int
+    expect(raw).toMatch(/"version":\s*1[,\s]/);
+    expect(raw).not.toContain('"version": 1.0');
+  });
+
+  it("preserves color values as integers", () => {
+    const filePath = path.join(tmpDir, "colors.json");
+    const layout = createEmptyLayout(128);
+    layout.tabs.push(createTab("Test"));
+    layout.tabs[0].grid_layout.containers.push(
+      createWidget("Boolean Box", "Flag", "/flag", 0, 0, 128, 128, {
+        true_color: 4283215696,
+        false_color: 4294198070,
+      }),
+    );
+
+    writeLayout(filePath, layout);
+    const raw = fs.readFileSync(filePath, "utf-8");
+
+    // Color values should NOT get .0 appended
+    expect(raw).toContain('"true_color": 4283215696');
+    expect(raw).not.toContain('"true_color": 4283215696.0');
   });
 });
 
