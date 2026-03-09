@@ -13,9 +13,18 @@ An MCP (Model Context Protocol) server for creating and editing [Elastic Dashboa
 
 ## Installation
 
+Install from GitHub Packages:
+
 ```bash
-npm install
-npm run build
+npm install @o-bots7160/elastic-dashboard-mcp --registry=https://npm.pkg.github.com
+```
+
+Or build from source:
+
+```bash
+git clone https://github.com/o-bots7160/elastic_dashboard-mcp.git
+cd elastic_dashboard-mcp
+npm install && npm run build
 ```
 
 ## Usage with VS Code / GitHub Copilot
@@ -29,7 +38,8 @@ Add to your `.vscode/mcp.json`:
       "command": "npx",
       "args": [
         "-y",
-        "github:o-bots7160/elastic_dashboard-mcp"
+        "--registry=https://npm.pkg.github.com",
+        "@o-bots7160/elastic-dashboard-mcp"
       ]
     }
   }
