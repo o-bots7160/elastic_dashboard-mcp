@@ -1,6 +1,6 @@
 {
   "name": "@o-bots7160/elastic-dashboard-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for creating and editing Elastic Dashboard layout JSON files",
   "main": "dist/index.js",
   "bin": {
@@ -14,7 +14,12 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
-  "keywords": ["mcp", "frc", "elastic-dashboard", "networktables"],
+  "keywords": [
+    "mcp",
+    "frc",
+    "elastic-dashboard",
+    "networktables"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/o-bots7160/elastic_dashboard-mcp.git"
