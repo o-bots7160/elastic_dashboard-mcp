@@ -404,7 +404,7 @@ npm run test -- --grep "pattern"  # Run a single test by name
 
 ## Releasing
 
-After pushing a new feature to `main`, create a release to publish to GitHub Packages. Bump the version in `package.json` first, then:
+After pushing a new feature or bug fix that changes runtime behavior (source code in `src/`, dependency changes, etc.), create a release to publish to GitHub Packages. Do **not** release for documentation-only changes (README, copilot-instructions, comments).
 
 ```bash
 npm version patch    # or minor/major — bumps package.json and creates a git tag
