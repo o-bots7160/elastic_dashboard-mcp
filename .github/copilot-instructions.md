@@ -402,6 +402,18 @@ npm test             # Run full test suite
 npm run test -- --grep "pattern"  # Run a single test by name
 ```
 
+## Releasing
+
+After pushing a new feature to `main`, create a release to publish to GitHub Packages. Bump the version in `package.json` first, then:
+
+```bash
+npm version patch    # or minor/major — bumps package.json and creates a git tag
+git push && git push --tags
+gh release create v$(node -p "require('./package.json').version") --generate-notes
+```
+
+The `publish.yml` workflow will automatically build, test, and publish the package to GitHub Packages on release.
+
 ## References
 
 - [Elastic Dashboard GitHub](https://github.com/Gold872/elastic_dashboard)
