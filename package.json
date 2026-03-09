@@ -20,7 +20,7 @@
     "url": "https://github.com/o-bots7160/elastic_dashboard-mcp.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "license": "MIT",
   "type": "module",
