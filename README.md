@@ -26,8 +26,11 @@ Add to your `.vscode/mcp.json`:
 {
   "servers": {
     "elastic-dashboard": {
-      "command": "node",
-      "args": ["/path/to/elastic-dashboard-mcp/dist/index.js"]
+      "command": "npx",
+      "args": [
+        "-y",
+        "github:o-bots7160/elastic_dashboard-mcp"
+      ]
     }
   }
 }
